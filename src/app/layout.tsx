@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+     
+        {/* Include any additional meta tags, stylesheets, or scripts here */}
+      </head>
+      <body className={inter.className}>
+        <div>
+          <Toaster />
+        </div>
+        {children}
+        {/* Include any additional scripts or footers here */}
+      </body>
     </html>
   )
 }
