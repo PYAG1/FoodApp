@@ -4,171 +4,171 @@ export const menuItems: MenuItem[]=[
 
     {
         id: 1,
-        name: 'Mediterranean  Salad',
+        title: 'Mediterranean  Salad',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 44,
-        img:'First.jpg'
-        ,delivery: '45'
+        img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'salad'
      
       },
       {
         id: 2,
-        name: 'Spicy Chicken Wings',
+        title: 'Spicy Chicken Wings',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 150,
-        img: 'chicken wings.jpg'
-        ,delivery: '10'
+        img: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'chicken'
       },
       {
         id: 3,
-        name: 'Chicken Noodle Soup',
+        title: 'Chicken Noodle Soup',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 95,
-        img: 'ChickenFilletsoup.jpg'
-        ,delivery: '30',
+        img: 'https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    ,
         urlparams:'chicken'
       },
       {
         id: 4,
-        name: 'Double Decker Burger',
+        title: 'Double Decker Burger',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 95,
-        img: 'tripple.jpg'
-        ,delivery: '45'
+        img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1899&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'burger'
       },
       {
         id: 5,
-        name: 'Beef Glazzed Pizza',
+        title: 'Beef Glazzed Pizza',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 100,
-        img: 'beefpizz.jpg'
-        ,delivery: '35'
+        img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+   
         ,urlparams:'pizza'
       },
       
       {
         id: 8,
-        name: 'Chicken Combo',
+        title: 'Chicken  Wraps',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 194,
-        img: 'chickendelight.jpg'
-        ,delivery: '20',
+        img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    ,
         urlparams:'chicken'
 
       },
       {
         id: 9,
-        name: 'Avocado Siren Salad',
+        title: 'Avocado Siren Salad',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 99,
-        img: 'acv.jpg'
-        ,delivery: '5'
+        img: 'https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    
         ,urlparams:'salad'
       },
       {
         id: 10,
-        name: 'Devils Breath Burger',
+        title: 'Devils Breath Burger',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 24,
-        img:'Devil.jpg' 
-        ,delivery: '25'
+        img:'https://images.unsplash.com/photo-1582196016295-f8c8bd4b3a99?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
+  
         ,urlparams:'burger'
       },
       {
         id: 11,
-        name: 'Hawaian Pizza',
+        title: 'Hawaian Pizza',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 24,
-        img: 'pizza3.jpg' 
-        ,delivery: '45'
+        img: 'https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' 
+  
         ,urlparams:'pizza'
       },
       {
         id: 12,
-        name: 'Chicken Stew',
+        title: 'Chicken Stew',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 204,
-        img: 'Pork Chicken Stew.jpg'
-        ,delivery: '45',
+        img: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=1913&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+     ,
         urlparams:'chicken'
 
       },
       {
         id: 13,
-        name: 'Chippy Burger Combo',
+        title: 'Chippy Burger Combo',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 90,
-        img: 'Chippycom.jpg'
-        ,delivery: '15'
+        img: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+      
         ,urlparams:'burger'
         
       },
       {
         id: 14,
-        name: 'Egg Salad',
+        title: 'Egg Salad',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 34,
-        img: 'Egg Salad.jpg'
-        ,delivery: '30'
+        img: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'salad'
         
       },
       {
         id: 15,
-        name: 'Mid-East Salad',
+        title: 'Mid-East Salad',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 90,
-        img: 'Mideast.jpg'
-        ,delivery: '40'
+        img: 'https://images.unsplash.com/photo-1607532941433-304659e8198a?q=80&w=1978&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'salad'
       },
       {
         id: 16,
-        name: 'Double Beef Burger',
+        title: 'Double Beef Burger',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 65,
-        img: 'doublebeef.jpg'
-        ,delivery: '40'
+        img: 'https://images.unsplash.com/photo-1607013251379-e6eecfffe234?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+     
         ,urlparams:'burger'
       },
       {
         id: 17,
-        name: 'Colonel Burger',
+        title: 'Colonel Burger',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 60,
-        img: 'Colonelburger.jpg'
-        ,delivery: '40'
+        img: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'burger'
       },
       {
         id: 18,
-        name: 'Zinger Burger',
+        title: 'Zinger Burger',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 65,
-        img: 'Zingerburger.jpg'
-        ,delivery: '40'
+        img: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?q=80&w=1922&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
          ,urlparams:'burger'
       },
       {
         id: 19,
-        name: 'Hawain Pizza',
+        title: 'Pepperonni Pizza',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 65,
-        img: 'pizza2.jpg'
-        ,delivery: '40'
+        img: 'https://images.unsplash.com/photo-1542282811-943ef1a977c3?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  
         ,urlparams:'pizza'
       },
  
       {
         id: 20,
-        name: 'Shrimp Salad',
+        title: 'Shrimp Salad',
         info: 'spicey with garlic and then deep fried to crispy perfection',
         price: 200,
-        img: 'test.jpg'
-        ,delivery: '40-50'
+        img: 'https://images.unsplash.com/photo-1551248429-40975aa4de74?q=80&w=1890&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        
         ,urlparams:'salad'
         
       },

@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
+import { Provider } from 'react-redux'
+import StoreProvider from './StoreProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+<StoreProvider>
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -32,5 +35,6 @@ export default function RootLayout({
         {/* Include any additional scripts or footers here */}
       </body>
     </html>
+    </StoreProvider>
   )
 }
