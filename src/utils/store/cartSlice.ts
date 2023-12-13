@@ -9,6 +9,7 @@ export const cartSlice = createSlice({
     OrderHistory: [],
     CurrentCart: [],
     totalQuantity: 0,
+    showCart:false
   } as CartState, // Provide initial state type
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
@@ -48,10 +49,14 @@ export const cartSlice = createSlice({
           }
         }
       },
+      ToggleCart:(state)=>{
+state.showCart = !state.showCart
+      }
       
   },
+  
 });
 
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart,ToggleCart } = cartSlice.actions;
 

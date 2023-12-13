@@ -20,4 +20,5 @@ export type MenuItem = {
     OrderHistory: any[]; // You might want to define a type for OrderHistory
     CurrentCart: Item[];
     totalQuantity: number;
+    showCart:boolean | undefined
   }

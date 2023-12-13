@@ -5,6 +5,7 @@ import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Provider } from 'react-redux'
 import StoreProvider from './StoreProvider'
+import SideBar from '@/components/navigation/SideBar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,8 +33,10 @@ export default function RootLayout({
           <Toaster />
         </div>
         {children}
-        {/* Include any additional scripts or footers here */}
+     
+        <SideBar/>
       </body>
+      
     </html>
     </StoreProvider>
   )

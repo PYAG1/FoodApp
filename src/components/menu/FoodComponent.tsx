@@ -29,7 +29,7 @@ console.log(stateData);
       {data.map((meal) => (
         <div>
         <li key={meal.img} className="relative">
-          <div className=" aspect-w-10 h-[300px] object-cover block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
+          <div className=" aspect-w-10 h-[300px] object-cover block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
             <img src={meal.img} alt="" className="pointer-events-none w-full h-full object-cover group-hover:opacity-75 group-hover:bg-indigo-200" />
             <button type="button" className="absolute inset-0 focus:outline-none">
               <span className="sr-only">View details for {meal.title}</span>

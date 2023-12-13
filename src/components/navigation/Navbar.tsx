@@ -3,8 +3,9 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon ,ShoppingCartIcon} from '@heroicons/react/24/outline'
 import { CiBurger } from 'react-icons/ci'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/utils/store/store'
+import { ToggleCart } from '@/utils/store/cartSlice'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -19,6 +20,7 @@ function classNames(...classes:string[]) {
 
 export default function NavBar() {
   const TotalQuantity = useSelector((state:RootState)=> state.cart.totalQuantity)
+  const dispatch = useDispatch()
   return (
     <Disclosure as="nav" className="bg-background">
       {({ open }) => (
@@ -38,15 +40,18 @@ export default function NavBar() {
               <button
   type="button"
   className="rounded-full p-1 text-gray-400 hover:text-white focus:outline-none relative"
+  onClick={() => dispatch(ToggleCart()) }
 >
   <span className="sr-only">View notifications</span>
-  <span className="inline-block">
+  <span className="inline-block" >
     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
     <span className="absolute bottom-0 right-0 block h-4 w-4  items-center justify-center rounded-full  bg-[#4c4c4c] ring-2 ring-[#4c4c4c]">
       <p className="text-xs font-bold text-primary">{TotalQuantity}</p>
     </span>
   </span>
-</button>
+  </button>
+
+
 
 
                 {/* Profile dropdown */}
