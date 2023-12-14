@@ -8,7 +8,9 @@ import {
 } from '@heroicons/react/24/outline'
 import { RootState } from '@/utils/store/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { ToggleCart } from '@/utils/store/cartSlice'
+import { ClearCart, RemoveFromCart, ToggleCart, addToCart, deleteFromCart } from '@/utils/store/cartSlice'
+import { Item } from '@/utils/types'
+import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/20/solid'
 
 
 
@@ -18,12 +20,18 @@ function classNames(...classes:string[]) {
 }
 
 export default function SideBar() {
-  
+
 const SideBarOpen =useSelector((state:RootState)=> state.cart.showCart)
+const CurrentCart = useSelector((state:RootState)=> state.cart.CurrentCart)
 const dispatch = useDispatch()
 const setSidebarOpen = ()=>{
     dispatch(ToggleCart())
 }
+const clearCart = ()=>{
+  dispatch(ClearCart())
+}
+
+
   return (
     <>
 
@@ -52,7 +60,7 @@ const setSidebarOpen = ()=>{
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-white">
+                <Dialog.Panel className="relative flex w-full max-w-sm flex-1 flex-col bg-white">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -72,9 +80,78 @@ const setSidebarOpen = ()=>{
                         <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                       </button>
                     </div>
+                   
                   </Transition.Child>
-<div>
-    
+<div className=' font-[Manrope] max-h-screen' >
+<div className=' w-full flex justify-between p-4'>
+  <p className=' text-lg font-semibold'>Cart</p>
+  <button onClick={clearCart}>
+    Clear
+  </button>
+</div>
+<div className=' bg-background rounded-tl-[40px] rounded-tr-[40px] min-h-screen'>
+<div className=' w-full  min-h-[55vh]  rounded-tl-[40px] rounded-tr-[40px]  p-3 overflow-y-scroll no-scrollbar'>
+{
+CurrentCart?.map((product:Item)=>(
+  <li key={product.id} className="flex py-6 px-4">
+  <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+    <img
+      src={product.img}
+      alt={product.name}
+      className="h-full w-full object-cover object-center"
+    />
+  </div>
+
+  <div className="ml-4 flex flex-1 flex-col">
+    <div>
+      <div className="flex justify-between text-base font-medium text-white">
+        <h3>
+          <a>{product.name}</a>
+        </h3>
+        <p className="ml-4">Ghc {product.price}</p>
+      </div>
+      
+    </div>
+    <div className="flex flex-1 items-end justify-between text-sm">
+ <div className=' flex gap-4'>
+ <p className="text-white">Qty {product.quantity}</p>
+ <div className=' flex gap-2'>
+  <button title='add' className=' w-5 h-5 flex justify-center items-center border border-gray-500' onClick={()=>{
+    dispatch(addToCart(product))
+  }}>
+    <PlusSmallIcon  className=' w-5 h-5 text-gray-500'/>
+   
+  </button>
+  <button title='subtract' className=' w-5 h-5 flex justify-center items-center border border-gray-500' onClick={()=>{
+    dispatch(deleteFromCart(product.id))
+  }}>
+  <MinusSmallIcon className=' w-5 h-5 text-gray-500'/>
+  </button>
+ </div>
+ </div>
+
+      <div className="flex">
+        <button
+          type="button"
+          className="font-medium text-primary hover:text-primary"
+          onClick={()=>{
+            dispatch(RemoveFromCart(product.id))
+          }}
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</li>
+))
+}
+
+</div>
+<div className=' flex w-full bg-background2 h-[40vh] rounded-tl-[40px] rounded-tr-[40px]'>
+  
+</div>
+</div>
 </div>
                 </Dialog.Panel>
               </Transition.Child>

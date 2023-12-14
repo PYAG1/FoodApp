@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
       }
 
     },
-    DeleteItem: (state, action: PayloadAction<any>) => {
+    deleteFromCart: (state, action: PayloadAction<any>) => {
         const id = action.payload;
         // finding the item with id === id
         const existingitem = state.CurrentCart.find((item) => id === item.id);
@@ -48,9 +48,22 @@ export const cartSlice = createSlice({
             existingitem.totalprice -= existingitem?.price;
           }
         }
+        
       },
       ToggleCart:(state)=>{
 state.showCart = !state.showCart
+      }
+      ,
+
+   
+      ClearCart:(state)=>{
+        state.CurrentCart = []
+      },
+      RemoveFromCart:(state, action: PayloadAction<any>)=>{
+        const id = action.payload;
+        state.CurrentCart = state.CurrentCart.filter((item)=>item.id !== id)
+        state.totalQuantity--
+        
       }
       
   },
@@ -58,5 +71,5 @@ state.showCart = !state.showCart
 });
 
 
-export const { addToCart,ToggleCart } = cartSlice.actions;
+export const { addToCart,ToggleCart,ClearCart,deleteFromCart,RemoveFromCart } = cartSlice.actions;
 
