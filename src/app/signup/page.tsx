@@ -2,7 +2,7 @@
 
 
 import TextField from "@/core-ui/TextField";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
@@ -11,9 +11,11 @@ import BeatLoader from "react-spinners/BeatLoader";
 import * as Y from "yup";
 import { UserRef, auth } from "../../../config/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [loading, setLoading] = React.useState<Boolean>(false);
+  const router = useRouter()
 
   const formik = useFormik({
     initialValues: { email: "", password: "", username: "" },
@@ -29,31 +31,23 @@ await signup(values.email,values.password,values.username)
     },
   });
 
+
   const signup = async (email: string, password: string, username: string) => {
     try {
       // Check if the email already exists
-      const emailSnapshot = await getDoc(doc(UserRef, email));
-      if (emailSnapshot.exists()) {
-        toast.error("Email Already exist", {
-          style: {
-            borderRadius: '10px',
-            background: '#333',
-            color: '#fff',
-          },
-        });
-      }
+
   
       // Check if the username already exists
       const usernameSnapshot = await getDoc(doc(UserRef, username));
       if (usernameSnapshot.exists()) {
-  
-        toast.error("Username already exist", {
+        toast.error("Username already exists", {
           style: {
             borderRadius: '10px',
             background: '#333',
             color: '#fff',
           },
         });
+        return; // Exit the function if username exists
       }
   
       // If email and username are unique, proceed with user creation
@@ -61,8 +55,14 @@ await signup(values.email,values.password,values.username)
       const user = userCredential?.user;
   
       if (user) {
+        // Set the display name for the newly created user
+        await updateProfile(user, { displayName: username });
+  
         // Add user data to the 'users' collection in Firestore
         await setDoc(doc(UserRef, email), { email, username });
+  
+        // Redirect to the sign-in page
+        router.push("/signin");
   
         toast.success('Your Account has been created', {
           style: {
@@ -81,7 +81,7 @@ await signup(values.email,values.password,values.username)
         },
       });
     }
-  };
+  }
   return (
     <div className="flex justify-between min-h-full bg-background  flex-1">
       <div className="flex flex-1 flex-col w-full h-screen  justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">

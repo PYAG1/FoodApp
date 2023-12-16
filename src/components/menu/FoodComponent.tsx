@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { FaShoppingBag } from 'react-icons/fa'
 import {menuItems} from "../../../src/utils/menuData"
 import { MenuItem } from '@/utils/types'
@@ -7,18 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '@/utils/store/cartSlice'
 import { Item } from '@/utils/types'
 import { RootState } from '@/utils/store/store'
+import toast from 'react-hot-toast'
 
 export default function FoodComponent({data}:{data:MenuItem[]}) {
-
+  const [show,setShow]=useState(false)
  const dispatch = useDispatch()
-const apple:Item={
-  id: 0,
-  price: 0,
-  quantity: 0,
-  totalprice: 0,
-  name: '',
-  img: ''
-}
+
+
 
       
 const stateData = useSelector((state:RootState)=> state.cart.CurrentCart)
@@ -48,9 +43,18 @@ console.log(stateData);
           quantity: 0,
           totalprice: 0
         }))
+        toast.success("Item added to cart", {
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
         }}>
+            
         <p className="pointer-events-none block text-sm font-medium text-gray-500"><FaShoppingBag size={22}/></p>
         </button>
+      
                     </div>
                     </div>
       ))}

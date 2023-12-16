@@ -1,6 +1,18 @@
+
 import React from 'react'
+import toast from 'react-hot-toast';
+
 
 export default function HeroSection() {
+  const username = localStorage.getItem("displayName");
+
+  React.useEffect(() => {
+    if (username) {
+      toast.success(`Welcome ${username}`);
+    } else {
+      toast.success("Welcome");
+    }
+  }, );
   return (
     <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 h-full w-full" aria-hidden="true">

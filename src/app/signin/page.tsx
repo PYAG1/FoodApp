@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import TextField from "@/core-ui/TextField";
 import { useFormik } from "formik";
@@ -8,11 +8,15 @@ import React from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import * as Y from "yup";
 import { auth } from "../../../config/firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import toast from "react-hot-toast";
 
 export default function Page() {
   const [loading, setLoading] = React.useState<Boolean>(false);
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: Y.object().shape({
@@ -21,39 +25,32 @@ export default function Page() {
     }),
     onSubmit: async (values) => {
       setLoading(true); // Set loading to true on form submission
-      router.push("/")
-       setLoading(false);
+      await signin(values.email, values.password);
+      setLoading(false);
     },
   });
-  /*
-  const signup = async (email: string, password: string) => {
+  const signin = async (email: string, password: string) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
       const user = userCredential?.user;
+
       if (user) {
-        navigate("/signin");
-        toast.success("Your Account has been created")
+        const displayName: string | null = user.displayName as string;
+
+        localStorage.setItem("displayName", displayName);
+
+        console.log(user);
+        router.push("/main");
+        toast.success("Signed in");
       }
     } catch (error: any) {
-      toast.error(error.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error(error.message);
     }
   };
-*/
-
-
 
   return (
     <div className="flex justify-between min-h-full bg-background  flex-1">
@@ -80,7 +77,7 @@ export default function Page() {
                   id="email"
                   {...formik}
                 />
-            
+
                 <TextField
                   label="Password"
                   placeholder="Enter your password"
@@ -97,14 +94,8 @@ export default function Page() {
                 </button>
                 <div className="flex items-center justify-end">
                   <div className="text-sm flex justify-end leading-6">
-                    <button
-                     
-                      className="underline manrope text-[#4c4c4c]  hover:text-primary"
-                    >
-                        <Link href="/signup">
-                        Don't have an account?
-                        </Link>
-                      
+                    <button className="underline manrope text-[#4c4c4c]  hover:text-primary">
+                      <Link href="/signup">Don't have an account?</Link>
                     </button>
                   </div>
                 </div>

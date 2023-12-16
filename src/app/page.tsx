@@ -57,7 +57,7 @@ export default function Home() {
                   color="inherit"
                   onClick={() => {}}
                 >
-                  <Link href={"/"}>Order</Link>
+                  <Link href={"/main"}>Order</Link>
                 </button>
                 <button className="w-[100px]" color="inherit">
                   <Link href={"/signin"}>Sign In</Link>

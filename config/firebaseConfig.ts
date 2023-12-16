@@ -20,4 +20,5 @@ projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
 export const app = initializeApp(firebaseConfig);
 export const database= getFirestore(app)
 export const UserRef= collection(database,"UserV2")
+export const OrderRef= collection(database,"OrdersV2")
 export const auth = getAuth(app)

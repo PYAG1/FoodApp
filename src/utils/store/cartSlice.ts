@@ -9,7 +9,7 @@ export const cartSlice = createSlice({
     OrderHistory: [],
     CurrentCart: [],
     totalQuantity: 0,
-    showCart:false
+    showCart: false,
   } as CartState, // Provide initial state type
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
@@ -21,55 +21,54 @@ export const cartSlice = createSlice({
         existingItem.quantity++;
       } else {
         state.CurrentCart.push({
-            id: newItem.id,
-            totalprice: newItem.price,
-            quantity: 1,
-            price: newItem.price,
-            name:newItem.name,
-            img: newItem.img
+          id: newItem.id,
+          totalprice: newItem.price,
+          quantity: 1,
+          price: newItem.price,
+          name: newItem.name,
+          img: newItem.img,
         });
         state.totalQuantity++;
       }
-
     },
     deleteFromCart: (state, action: PayloadAction<any>) => {
-        const id = action.payload;
-        // finding the item with id === id
-        const existingitem = state.CurrentCart.find((item) => id === item.id);
-      
-        if (existingitem) {
-          // clearing item from cart if quantity === 1
-          if (existingitem.quantity === 1) {
-            state.CurrentCart = state.CurrentCart.filter((item) => item.id !== id);
-            state.totalQuantity--;
-          } else {
-            // reducing the item quantity
-            existingitem.quantity--;
-            existingitem.totalprice -= existingitem?.price;
-          }
-        }
-        
-      },
-      ToggleCart:(state)=>{
-state.showCart = !state.showCart
-      }
-      ,
+      const id = action.payload;
+      // finding the item with id === id
+      const existingitem = state.CurrentCart.find((item) => id === item.id);
 
-   
-      ClearCart:(state)=>{
-        state.CurrentCart = []
-      },
-      RemoveFromCart:(state, action: PayloadAction<any>)=>{
-        const id = action.payload;
-        state.CurrentCart = state.CurrentCart.filter((item)=>item.id !== id)
-        state.totalQuantity--
-        
+      if (existingitem) {
+        // clearing item from cart if quantity === 1
+        if (existingitem.quantity === 1) {
+          state.CurrentCart = state.CurrentCart.filter(
+            (item) => item.id !== id
+          );
+          state.totalQuantity--;
+        } else {
+          // reducing the item quantity
+          existingitem.quantity--;
+          existingitem.totalprice -= existingitem?.price;
+        }
       }
-      
+    },
+    ToggleCart: (state) => {
+      state.showCart = !state.showCart;
+    },
+    ClearCart: (state) => {
+      state.CurrentCart = [];
+      state.totalQuantity = 0;
+    },
+    RemoveFromCart: (state, action: PayloadAction<any>) => {
+      const id = action.payload;
+      state.CurrentCart = state.CurrentCart.filter((item) => item.id !== id);
+      state.totalQuantity--;
+    },
   },
-  
 });
 
-
-export const { addToCart,ToggleCart,ClearCart,deleteFromCart,RemoveFromCart } = cartSlice.actions;
-
+export const {
+  addToCart,
+  ToggleCart,
+  ClearCart,
+  deleteFromCart,
+  RemoveFromCart,
+} = cartSlice.actions;
