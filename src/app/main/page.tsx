@@ -6,12 +6,15 @@ import OurMenu from '@/components/main/OurMenu';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { RootState } from '@/utils/store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '@/utils/store/cartSlice';
 
 
 export default function Page() {
-  const username = useSelector((state:RootState)=> state.cart.currentUser)
+ 
+  const dispatch= useDispatch()
 
+  const username = useSelector((state:RootState)=> state.cart.currentUser)
   React.useEffect(() => {
 
     if(username){

@@ -8,16 +8,13 @@ import React from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import * as Y from "yup";
 import { auth } from "../../../config/firebaseConfig";
-import {
-
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "@/utils/store/cartSlice";
 
 export default function Page() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [loading, setLoading] = React.useState<Boolean>(false);
   const router = useRouter();
   const formik = useFormik({
@@ -45,16 +42,9 @@ export default function Page() {
         const displayName: string | null = user.displayName as string;
 
         localStorage.setItem("displayName", displayName);
+        const storedDisplayName = localStorage.getItem("displayName");
+        dispatch(setCurrentUser(storedDisplayName));
 
-        React.useEffect(() => {
-          // Check if window is defined (client-side) before using localStorage
-          if (typeof window !== 'undefined') {
-            const storedDisplayName = localStorage.getItem('displayName');
-      
-      dispatch(setCurrentUser(storedDisplayName))
-         
-          }
-        }, []);
         router.push("/main");
         toast.success("Signed in");
       }
@@ -62,7 +52,14 @@ export default function Page() {
       toast.error(error.message);
     }
   };
+  React.useEffect(() => {
+    // Check if window is defined (client-side) before using localStorage
+    if (typeof window !== "undefined") {
+      const storedDisplayName = localStorage.getItem("displayName");
 
+      dispatch(setCurrentUser(storedDisplayName));
+    }
+  }, []);
   return (
     <div className="flex justify-between min-h-full bg-background  flex-1">
       <div className="flex flex-1 flex-col w-full h-screen  justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
