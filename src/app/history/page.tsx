@@ -59,7 +59,7 @@ setorderHistory(orderHistoryData)
     getOrderHistory(username);
   },[]);
 if(!username){
-router.replace("/main")
+router.push("/main")
 }
   return (
     <div className="bg-white w-full font-[Manrope]">
