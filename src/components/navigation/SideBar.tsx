@@ -50,8 +50,9 @@ export default function SideBar() {
       )}-${new Date().getMonth()}`,
       orderItems: CurrentCart,
       date: `${new Date().getDay()}/${new Date().getMonth()}/${new Date().getFullYear()}`,
-      total: `Ghc ${total+20}`
-    };
+      total: `Ghc ${total+20}`,
+      user:username
+    }
     try {
       addDoc(OrderRef, newOrder);
       toast.success(

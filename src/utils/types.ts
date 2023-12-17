@@ -22,3 +22,10 @@ export type MenuItem = {
     totalQuantity: number;
     showCart:boolean | undefined
   }
+  export  type Order = {
+    orderNum: string;
+    date: string;
+    invoiceHref: string;
+    total: string;
+    orderItems: Item[]; // Array of products
+  };

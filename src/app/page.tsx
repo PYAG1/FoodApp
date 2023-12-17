@@ -7,12 +7,35 @@ import { FaCopyright } from "react-icons/fa";
 import frontpagemeal from "../assets/images/frontpageMeal.jpg";
 import { useState } from "react";
 import Link from "next/link";
-
+import { XMarkIcon } from '@heroicons/react/24/outline'
 export default function Home() {
   const [show, setShow] = useState();
-
+/*  <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:items-start sm:pt-1 sm:pr-2">
+          <button
+            type="button"
+            className="flex rounded-md p-2 hover-primary focus:outline-none focus:ring-2 focus:ring-white"
+          >
+            <span className="sr-only">Dismiss</span>
+            <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          </button>
+        </div>*/
   return (
-    <div className=" bg-background w-full min-h-screen flex felx-col justify-center items-center p-[3em]">
+    <div>
+           <div className="absolute top-0 bg-background2 w-screen ">
+      <div className="mx-auto max-w-7xl py-3 px-3 sm:px-6 lg:px-8">
+        <div className="pr-16 sm:px-16 sm:text-center">
+          <p className="font-medium text-primary">
+            <span className="md:hidden">Note</span>
+            <span className="hidden md:inline">Signing in allows you to view your order history</span>
+  
+          </p>
+        </div>
+      
+      </div>
+    </div>
+ 
+    <div className=" bg-background w-full min-h-[100svh] flex felx-col justify-center items-center p-[3em]">
+  
       <div
         className={
           show ? " flex flex-col items-center h-[200px] justify-evenly" : ""
@@ -68,8 +91,13 @@ export default function Home() {
         )}
       </div>
     </div>
+    </div>
   );
 }
 function useClient() {
   throw new Error("Function not implemented.");
 }
+
+
+
+
