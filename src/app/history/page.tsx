@@ -10,6 +10,9 @@ import { Disclosure } from '@headlessui/react'
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
+import Link from "next/link";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 
@@ -22,8 +25,7 @@ export default function Page() {
 
   const username = useSelector((state:RootState)=> state.cart.currentUser)
   const [orderHistory,setorderHistory] = useState<Array<Order>>([]) 
-
-  console.log(username)
+const router = useRouter()
 
 
   const getOrderHistory = async (username: string| undefined) => {
@@ -52,12 +54,13 @@ setorderHistory(orderHistoryData)
     }
   };
 
-  console.log(orderHistory)
 
   useEffect(() => {
     getOrderHistory(username);
   },[]);
-
+if(!username){
+router.replace("/main")
+}
   return (
     <div className="bg-white w-full font-[Manrope]">
       <NavBar />
@@ -76,6 +79,7 @@ setorderHistory(orderHistoryData)
               Check the status of recent orders, manage returns, and download
               invoices.
             </p>
+            <Link href={"/main"} className="text-black underline font-[Oswald] hover:text-background2/50">Go Back</Link>
           </div>
 
           <div className="mt-16">
@@ -200,6 +204,8 @@ setorderHistory(orderHistoryData)
                 </Disclosure>
               ))}
             </div>)}
+
+
           </div>
         </div>
       )}

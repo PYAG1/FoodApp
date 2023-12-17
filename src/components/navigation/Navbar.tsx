@@ -37,7 +37,7 @@ export default function NavBar() {
               <div className="flex flex-1 items-center justify-start sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                 <CiBurger size={30} className='text-[#ccff01] '/>
-      <Link href={"/main"} className=' font-[Oswald] text-white cursor-pointer'>MascotBites</Link>
+      <Link href={"/"} className=' font-[Oswald] text-white cursor-pointer'>MascotBites</Link>
                 </div>
 
               </div>

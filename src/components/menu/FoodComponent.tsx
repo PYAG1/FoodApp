@@ -17,7 +17,7 @@ export default function FoodComponent({data}:{data:MenuItem[]}) {
 
       
 const stateData = useSelector((state:RootState)=> state.cart.CurrentCart)
-console.log(stateData);
+
 
   return (
     <ul role="list" className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">

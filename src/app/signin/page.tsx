@@ -98,7 +98,7 @@ export default function Page() {
                   type="submit"
                   className="w-full font-manrope  rounded-md bg-primary  py-3 text-sm font-semibold leading-6 text-background shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  {loading ? <BeatLoader size={8} color={"#fff"} /> : "Sign in"}
+                  {loading ? <BeatLoader size={8} color={"black"} /> : "Sign in"}
                 </button>
                 <div className="flex items-center justify-end">
                   <div className="text-sm flex justify-end leading-6">

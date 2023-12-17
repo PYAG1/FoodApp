@@ -13,7 +13,7 @@ export default function OurMenu() {
     }
 
   })
-  console.log(shortMenu)
+
   return (
     <div className='py-[3em] px-[1.5em] my-10'>
         <div>
