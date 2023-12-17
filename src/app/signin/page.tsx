@@ -13,8 +13,11 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "@/utils/store/cartSlice";
 
 export default function Page() {
+  const dispatch = useDispatch()
   const [loading, setLoading] = React.useState<Boolean>(false);
   const router = useRouter();
   const formik = useFormik({
@@ -43,7 +46,15 @@ export default function Page() {
 
         localStorage.setItem("displayName", displayName);
 
-        console.log(user);
+        React.useEffect(() => {
+          // Check if window is defined (client-side) before using localStorage
+          if (typeof window !== 'undefined') {
+            const storedDisplayName = localStorage.getItem('displayName');
+      
+      dispatch(setCurrentUser(storedDisplayName))
+         
+          }
+        }, []);
         router.push("/main");
         toast.success("Signed in");
       }

@@ -1,6 +1,6 @@
 
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { RootState } from "@/utils/store/store";
@@ -27,20 +27,23 @@ function classNames(...classes: string[]) {
 export default function SideBar() {
   const SideBarOpen = useSelector((state: RootState) => state.cart.showCart);
   const CurrentCart = useSelector((state: RootState) => state.cart.CurrentCart); 
-  const username = localStorage.getItem("displayName");
+  const dispatch = useDispatch();
+
+  const username = useSelector((state:RootState)=> state.cart.currentUser)
+
 
   let total = 0;
   CurrentCart.forEach((item) => {
     total += item.totalprice;
   });
-  const dispatch = useDispatch();
+
   const setSidebarOpen = () => {
     dispatch(ToggleCart());
   };
   const clearCart = () => {
     dispatch(ClearCart());
   };
-  console.log(new Date().getMonth());
+
 
   const SubmitOrder = async () => {
     const newOrder = {

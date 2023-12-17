@@ -7,29 +7,11 @@ import toast from "react-hot-toast";
 import { OrderRef } from "../../../config/firebaseConfig";
 import { Item, Order } from "@/utils/types";
 import { Disclosure } from '@headlessui/react'
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/utils/store/store";
 
-const orders = [
-  {
-    orderNum: "WU88191111",
-    date: "January 22, 2021",
-    invoiceHref: "#",
-    total: "$238.00",
-    orderItems: [
-      {
-        id: 1,
-        name: "Machined Pen and Pencil Set",
-        price: "$70.00",
-        
-        img:
-          "https://tailwindui.com/img/ecommerce-images/order-history-page-02-product-01.jpg",
-          quantity:0,
-          totalprice:0
-      },
-      // More products...
-    ],
-  },
-  // More orders...
-];
+
 
 
 
@@ -37,12 +19,14 @@ const orders = [
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
-  const username = localStorage.getItem("displayName") as string;
+
+  const username = useSelector((state:RootState)=> state.cart.currentUser)
   const [orderHistory,setorderHistory] = useState<Array<Order>>([]) 
 
+  console.log(username)
 
 
-  const getOrderHistory = async (username: string) => {
+  const getOrderHistory = async (username: string| undefined) => {
     try {
       const q = query(OrderRef, where("user", "==", username));
       const snapshot = await getDocs(q);
@@ -72,7 +56,7 @@ setorderHistory(orderHistoryData)
 
   useEffect(() => {
     getOrderHistory(username);
-  }, [getOrderHistory]);
+  },[]);
 
   return (
     <div className="bg-white w-full font-[Manrope]">
@@ -97,7 +81,8 @@ setorderHistory(orderHistoryData)
           <div className="mt-16">
             <h2 className="sr-only">Recent orders</h2>
 
-            <div className=" space-y-12">
+          {orderHistory.length === 0 && (<div>You have not made any previous orders</div>)}
+          {orderHistory.length > 0 && (  <div className=" space-y-12">
               {orderHistory.map((order) => (
                  <Disclosure as="div" key={order?.orderNum}>
                        {({ open }) => (
@@ -214,7 +199,7 @@ setorderHistory(orderHistoryData)
                 </>)}
                 </Disclosure>
               ))}
-            </div>
+            </div>)}
           </div>
         </div>
       )}

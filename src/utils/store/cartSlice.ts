@@ -10,6 +10,7 @@ export const cartSlice = createSlice({
     CurrentCart: [],
     totalQuantity: 0,
     showCart: false,
+    currentUser:""
   } as CartState, // Provide initial state type
   reducers: {
     addToCart: (state, action: PayloadAction<Item>) => {
@@ -62,6 +63,9 @@ export const cartSlice = createSlice({
       state.CurrentCart = state.CurrentCart.filter((item) => item.id !== id);
       state.totalQuantity--;
     },
+    setCurrentUser:(state,action: PayloadAction<any>)=>{
+      state.currentUser = action.payload
+    }
   },
 });
 
@@ -71,4 +75,5 @@ export const {
   ClearCart,
   deleteFromCart,
   RemoveFromCart,
+  setCurrentUser
 } = cartSlice.actions;

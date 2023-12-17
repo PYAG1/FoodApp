@@ -25,7 +25,8 @@ export default function NavBar() {
   const TotalQuantity = useSelector((state:RootState)=> state.cart.totalQuantity)
   const dispatch = useDispatch()
   const router = useRouter()
-  const user = localStorage.getItem("displayName")
+  
+  const user = useSelector((state:RootState)=> state.cart.currentUser)
   return (
     <Disclosure as="nav" className="bg-background">
       {({ open }) => (

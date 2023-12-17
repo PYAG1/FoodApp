@@ -1,18 +1,16 @@
 
+import { setCurrentUser } from '@/utils/store/cartSlice';
+import { RootState } from '@/utils/store/store';
 import React from 'react'
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function HeroSection() {
-  const username = localStorage.getItem("displayName");
+  const dispatch = useDispatch()
 
-  React.useEffect(() => {
-    if (username) {
-      toast.success(`Welcome ${username}`);
-    } else {
-      toast.success("Welcome");
-    }
-  }, );
+
+
   return (
     <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 h-full w-full" aria-hidden="true">
