@@ -95,7 +95,7 @@ export default function Page() {
                 <div className="flex items-center justify-end">
                   <div className="text-sm flex justify-end leading-6">
                     <button className="underline manrope text-[#4c4c4c]  hover:text-primary">
-                      <Link href="/signup">Don't have an account?</Link>
+                      <Link href="/signup">Don&apos;t have an account?</Link>
                     </button>
                   </div>
                 </div>
