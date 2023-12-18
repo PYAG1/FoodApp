@@ -1,4 +1,4 @@
-https://food-appv2.vercel.app/
+https://food-app-pyag1.vercel.app/
 This is an Updated version
 A full-stack React food ordering app using Redux Toolkit,Redux, and Firebase for the backend can provide a seamless user experience with advanced features. Here are some additional details on how this app can be implemented:
 
