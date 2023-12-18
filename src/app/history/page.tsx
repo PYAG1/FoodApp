@@ -6,7 +6,7 @@ import { getDocs, query, where } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { OrderRef } from "../../../config/firebaseConfig";
 import { Item, Order } from "@/utils/types";
-import { Disclosure } from '@headlessui/react'
+import { Disclosure } from "@headlessui/react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store/store";
@@ -14,21 +14,14 @@ import Link from "next/link";
 import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 
-
-
-
-
-
-
 export default function Page() {
   const [loading, setLoading] = useState(true);
 
-  const username = useSelector((state:RootState)=> state.cart.currentUser)
-  const [orderHistory,setorderHistory] = useState<Array<Order>>([]) 
-const router = useRouter()
+  const username = useSelector((state: RootState) => state.cart.currentUser);
+  const router = useRouter()
+  const [orderHistory, setorderHistory] = useState<Array<Order>>([]);
 
-
-  const getOrderHistory = async (username: string| undefined) => {
+  const getOrderHistory = async (username: string | undefined) => {
     try {
       const q = query(OrderRef, where("user", "==", username));
       const snapshot = await getDocs(q);
@@ -36,12 +29,11 @@ const router = useRouter()
       // Map the documents and include the document ID
       const orderHistoryData = snapshot.docs.map((doc) => ({
         ...doc.data(),
-
       }));
 
       // Do something with the orderHistory data (e.g., set it in state, return it, etc.)
-     //@ts-ignore
-setorderHistory(orderHistoryData)
+      //@ts-ignore
+      setorderHistory(orderHistoryData);
       // Handle loading state if needed
       setLoading(false);
     } catch (error) {
@@ -56,11 +48,17 @@ setorderHistory(orderHistoryData)
 
 
   useEffect(() => {
-    getOrderHistory(username);
-  },[]);
-if(!username){
-router.push("/main")
-}
+    if (!username) {
+      // Redirect to main page if username is not defined
+      router.push("/main");
+    } else {
+      getOrderHistory(username);
+    }
+  }, [username]); // Include username as a dependency
+
+  // ... (existing code)
+
+
   return (
     <div className="bg-white w-full font-[Manrope]">
       <NavBar />
@@ -69,7 +67,6 @@ router.push("/main")
           <ClipLoader size={35} className=" text-background" />
         </div>
       ) : (
-        
         <div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:px-8 lg:pb-24">
           <div className="max-w-xl">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
@@ -79,133 +76,149 @@ router.push("/main")
               Check the status of recent orders, manage returns, and download
               invoices.
             </p>
-            <Link href={"/main"} className="text-black underline font-[Oswald] hover:text-background2/50">Go Back</Link>
+            <Link
+              href={"/main"}
+              className="text-black underline font-[Oswald] hover:text-background2/50"
+            >
+              Go Back
+            </Link>
           </div>
 
           <div className="mt-16">
             <h2 className="sr-only">Recent orders</h2>
 
-          {orderHistory.length === 0 && (<div>You have not made any previous orders</div>)}
-          {orderHistory.length > 0 && (  <div className=" space-y-12">
-              {orderHistory.map((order) => (
-                 <Disclosure as="div" key={order?.orderNum}>
-                       {({ open }) => (
-                  <>
-                <div key={order?.orderNum}>
-                  <h3 className="sr-only">
-                    Order placed on{" "}
-                    <time dateTime={order?.date}>{order?.date}</time>
-                  </h3>
+            {orderHistory.length === 0 && (
+              <div>You have not made any previous orders</div>
+            )}
+            {orderHistory.length > 0 && (
+              <div className=" space-y-12">
+                {orderHistory.map((order) => (
+                  <Disclosure as="div" key={order?.orderNum}>
+                    {({ open }) => (
+                      <>
+                        <div key={order?.orderNum}>
+                          <h3 className="sr-only">
+                            Order placed on{" "}
+                            <time dateTime={order?.date}>{order?.date}</time>
+                          </h3>
 
-                  <div className="rounded-lg bg-gray-50 py-6 px-4 sm:flex sm:items-center sm:justify-between sm:space-x-6 sm:px-6 lg:space-x-8">
-                    <dl className="flex-auto space-y-6 divide-y divide-gray-200 text-sm text-gray-600 sm:grid sm:grid-cols-3 sm:gap-x-6 sm:space-y-0 sm:divide-y-0 lg:w-1/2 lg:flex-none lg:gap-x-8">
-                      <div className="flex justify-between sm:block">
-                        <dt className="font-medium text-gray-900">
-                          Date placed
-                        </dt>
-                        <dd className="sm:mt-1">
-                          <time dateTime={order?.date}>{order?.date}</time>
-                        </dd>
-                      </div>
-                      <div className="flex justify-between pt-6 sm:block sm:pt-0">
-                        <dt className="font-medium text-gray-900">
-                          Order number
-                        </dt>
-                        <dd className="sm:mt-1">{order?.orderNum}</dd>
-                      </div>
-                      <div className="flex justify-between pt-6 font-medium text-gray-900 sm:block sm:pt-0">
-                        <dt>Total amount</dt>
-                        <dd className="sm:mt-1">{order?.total}</dd>
-                      </div>
-                    </dl>
-                    /
-                    <Disclosure.Button>
-                    <a
-                      href={order?.invoiceHref}
-                      className="mt-6 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto"
-                    >
-                      View Details
-                      <span className="sr-only">for order {order?.orderNum}</span>
-                    </a>
-                    </Disclosure.Button>
-                  </div>
-                  <Disclosure.Panel as="dd">
-                  <table className="mt-4 w-full text-gray-500 sm:mt-6">
-                    <caption className="sr-only">Products</caption>
-                    <thead className="sr-only text-left text-sm text-gray-500 sm:not-sr-only">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-3 pr-8 font-normal sm:w-2/5 lg:w-1/3"
-                        >
-                          Product
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden w-1/5 py-3 pr-8 font-normal sm:table-cell"
-                        >
-                          Price
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden py-3 pr-8 font-normal sm:table-cell"
-                        >
-                          Total Price
-                        </th>
-                        <th
-                          scope="col"
-                          className="w-0 py-3 text-right font-normal"
-                        >
-                          Info
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
-                      {order?.orderItems.map((product) => (
-                        <tr key={product.id}>
-                          <td className="py-6 pr-8">
-                            <div className="flex items-center">
-                              <img
-                                src={product.img}
-                                alt={product.name}
-                                className="mr-6 h-16 w-16 rounded object-cover object-center"
-                              />
-                              <div>
-                                <div className="font-medium text-gray-900">
-                                  {product.name}
-                                </div>
-                                <div className="mt-1 sm:hidden">
-                                 Ghc {product.price}
-                                </div>
+                          <div className="rounded-lg bg-gray-50 py-6 px-4 sm:flex sm:items-center sm:justify-between sm:space-x-6 sm:px-6 lg:space-x-8">
+                            <dl className="flex-auto space-y-6 divide-y divide-gray-200 text-sm text-gray-600 sm:grid sm:grid-cols-3 sm:gap-x-6 sm:space-y-0 sm:divide-y-0 lg:w-1/2 lg:flex-none lg:gap-x-8">
+                              <div className="flex justify-between sm:block">
+                                <dt className="font-medium text-gray-900">
+                                  Date placed
+                                </dt>
+                                <dd className="sm:mt-1">
+                                  <time dateTime={order?.date}>
+                                    {order?.date}
+                                  </time>
+                                </dd>
                               </div>
-                            </div>
-                          </td>
-                          <td className="hidden py-6 pr-8 sm:table-cell">
-                           Ghc {product.price}
-                          </td>
-                          <td className="hidden py-6 pr-8 sm:table-cell">
-                           Ghc {product.totalprice}
-                          </td>
-                     
-                          <td className="whitespace-nowrap py-6 text-right font-medium">
-                            <p  className="text-indigo-600">
-                              Quantity: 
-                              <span className=" lg:inline">{product.quantity}</span>
-                              <span className="sr-only">, {product.name}</span>
-                            </p>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  </Disclosure.Panel>
-                </div>
-                </>)}
-                </Disclosure>
-              ))}
-            </div>)}
+                              <div className="flex justify-between pt-6 sm:block sm:pt-0">
+                                <dt className="font-medium text-gray-900">
+                                  Order number
+                                </dt>
+                                <dd className="sm:mt-1">{order?.orderNum}</dd>
+                              </div>
+                              <div className="flex justify-between pt-6 font-medium text-gray-900 sm:block sm:pt-0">
+                                <dt>Total amount</dt>
+                                <dd className="sm:mt-1">{order?.total}</dd>
+                              </div>
+                            </dl>
+                            /
+                            <Disclosure.Button>
+                              <a
+                                href={order?.invoiceHref}
+                                className="mt-6 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto"
+                              >
+                                View Details
+                                <span className="sr-only">
+                                  for order {order?.orderNum}
+                                </span>
+                              </a>
+                            </Disclosure.Button>
+                          </div>
+                          <Disclosure.Panel as="dd">
+                            <table className="mt-4 w-full text-gray-500 sm:mt-6">
+                              <caption className="sr-only">Products</caption>
+                              <thead className="sr-only text-left text-sm text-gray-500 sm:not-sr-only">
+                                <tr>
+                                  <th
+                                    scope="col"
+                                    className="py-3 pr-8 font-normal sm:w-2/5 lg:w-1/3"
+                                  >
+                                    Product
+                                  </th>
+                                  <th
+                                    scope="col"
+                                    className="hidden w-1/5 py-3 pr-8 font-normal sm:table-cell"
+                                  >
+                                    Price
+                                  </th>
+                                  <th
+                                    scope="col"
+                                    className="hidden py-3 pr-8 font-normal sm:table-cell"
+                                  >
+                                    Total Price
+                                  </th>
+                                  <th
+                                    scope="col"
+                                    className="w-0 py-3 text-right font-normal"
+                                  >
+                                    Info
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody className="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
+                                {order?.orderItems.map((product) => (
+                                  <tr key={product.id}>
+                                    <td className="py-6 pr-8">
+                                      <div className="flex items-center">
+                                        <img
+                                          src={product.img}
+                                          alt={product.name}
+                                          className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                        />
+                                        <div>
+                                          <div className="font-medium text-gray-900">
+                                            {product.name}
+                                          </div>
+                                          <div className="mt-1 sm:hidden">
+                                            Ghc {product.price}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td className="hidden py-6 pr-8 sm:table-cell">
+                                      Ghc {product.price}
+                                    </td>
+                                    <td className="hidden py-6 pr-8 sm:table-cell">
+                                      Ghc {product.totalprice}
+                                    </td>
 
-
+                                    <td className="whitespace-nowrap py-6 text-right font-medium">
+                                      <p className="text-indigo-600">
+                                        Quantity:
+                                        <span className=" lg:inline">
+                                          {product.quantity}
+                                        </span>
+                                        <span className="sr-only">
+                                          , {product.name}
+                                        </span>
+                                      </p>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </Disclosure.Panel>
+                        </div>
+                      </>
+                    )}
+                  </Disclosure>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

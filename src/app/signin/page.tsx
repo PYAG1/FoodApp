@@ -52,14 +52,7 @@ export default function Page() {
       toast.error(error.message);
     }
   };
-  React.useEffect(() => {
-    // Check if window is defined (client-side) before using localStorage
-    if (typeof window !== "undefined") {
-      const storedDisplayName = localStorage.getItem("displayName");
 
-      dispatch(setCurrentUser(storedDisplayName));
-    }
-  }, []);
   return (
     <div className="flex justify-between min-h-full bg-background  flex-1">
       <div className="flex flex-1 flex-col w-full h-screen  justify-center items-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">

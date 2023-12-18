@@ -7,6 +7,7 @@ import StoreProvider from './StoreProvider'
 import SideBar from '@/components/navigation/SideBar'
 
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+   
 <StoreProvider>
     <html lang="en">
       <head>
@@ -40,5 +42,6 @@ export default function RootLayout({
       
     </html>
     </StoreProvider>
+
   )
 }
